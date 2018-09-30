@@ -9,5 +9,6 @@ public class NomalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nomal_activity);
+
     }
 }
