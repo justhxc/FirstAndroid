@@ -18,4 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Quit" />
+    <Button
+        android:id="@+id/button_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="StartFirst" />
+    <Button
+        android:id="@+id/button_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="StartThird" />
 </LinearLayout>

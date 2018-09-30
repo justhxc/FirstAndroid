@@ -4,15 +4,25 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends BaseActivity {
+
+    private static final String TAG = "tag";
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "2Task id is "+getTaskId());
         setContentView(R.layout.activity_second);
         Button button2 =findViewById(R.id.button_2);
 //        获取数据
@@ -56,6 +66,26 @@ public class SecondActivity extends AppCompatActivity {
                 intent.putExtra("info2","info from secondActivity");
                 setResult(RESULT_OK,intent);
                 finish();
+            }
+        });
+        Button button5=findViewById(R.id.button_6);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SecondActivity.this,FirstActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /**
+         * 体验singleInstance
+         */
+        Button button6 =findViewById(R.id.button_7);
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this,ThirdActivity.class);
+                startActivity(intent);
             }
         });
     }
