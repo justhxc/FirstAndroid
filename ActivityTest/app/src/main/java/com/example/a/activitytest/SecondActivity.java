@@ -1,5 +1,6 @@
 package com.example.a.activitytest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -96,5 +97,20 @@ public class SecondActivity extends BaseActivity {
         intent.putExtra("info2","info from secondActivity");
         setResult(RESULT_OK,intent);
         finish();
+    }
+
+
+    /**
+     * 启动本活动
+     * @param context   上下文
+     * @param data1 数据1
+     * @param data2 数据2
+     */
+    public static void actionStart(Context context,String data1,String data2) {
+        Intent intent = new Intent(context,SecondActivity.class);
+        intent.putExtra("param1",data1);
+        intent.putExtra("param2",data2);
+        context.startActivity(intent);
+
     }
 }
