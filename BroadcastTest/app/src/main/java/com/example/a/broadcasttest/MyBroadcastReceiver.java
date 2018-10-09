@@ -12,5 +12,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
         Toast.makeText(context,"receive MyBroadcast",Toast.LENGTH_SHORT).show();
+        abortBroadcast();//截断有序广播
     }
 }
