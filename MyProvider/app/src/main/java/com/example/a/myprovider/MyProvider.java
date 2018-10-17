@@ -42,6 +42,7 @@ public class MyProvider extends ContentProvider {
             default:
                 break;
         }
+        return null;
     }
     /**获取对象对应的MIME类型*/
     @Override
@@ -58,6 +59,7 @@ public class MyProvider extends ContentProvider {
             default:
                 break;
         }
+        return null;
     }
 
 
