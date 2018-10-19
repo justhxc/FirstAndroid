@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -58,11 +61,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://10.0.2.2:8080/get_data.xml")
+//                            .url("http://10.0.2.2:8080/get_data.xml")
+//                            .url("https://www.baidu.com")
+                            .url("http://10.0.2.2:8080/get_data.json")
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
-                    parseXMLWithSAX(responseData);
+                    parseJsonwithJSONObject(responseData);
+//                    parseXMLWithSAX(responseData);
 //                    parseXMLWithPull(responseData);
 //                    showResponse(responseData);
                 } catch (IOException e) {
@@ -72,7 +78,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }).start();
     }
 
-   /**还有DOM解析方式待拓展*/
+    private void parseJsonwithJSONObject(String jsonData) {
+        try {
+            JSONArray jsonArray = new JSONArray(jsonData);
+            for (int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String id = jsonObject.getString("id");
+                String name = jsonObject.getString("name");
+                String version = jsonObject.getString("version");
+                Log.d(TAG, "parseJsonwithJSONObject: id is "+ id);
+                Log.d(TAG, "parseJsonwithJSONObject: name is "+ name);
+                Log.d(TAG, "parseJsonwithJSONObject: version is "+ version);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**还有DOM解析方式待拓展*/
    private void parseXMLWithDOM(String xmlData) {
 
    }
