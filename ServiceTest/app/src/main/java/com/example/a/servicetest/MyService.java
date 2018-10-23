@@ -1,10 +1,16 @@
 package com.example.a.servicetest;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.nfc.Tag;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 /**
@@ -38,6 +44,22 @@ public class MyService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate: service created!");
+        Intent intent = new Intent(this,MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(this,0,intent,0);
+        NotificationChannel channel = new NotificationChannel("default","Default",NotificationManager.IMPORTANCE_HIGH);
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(channel);//安卓8.0后需要创建通知管道,用于通知分类等
+
+        Notification notification = new NotificationCompat.Builder(this,"default")
+                .setContentTitle("Title")
+                .setContentText("Service is running Foreground")
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
+                .setContentIntent(pi)
+                .build();
+        startForeground(1,notification);
+
     }
 
     @Override

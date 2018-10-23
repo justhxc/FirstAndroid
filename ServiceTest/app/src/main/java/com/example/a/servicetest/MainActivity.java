@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bindService.setOnClickListener(this);
         unbindService.setOnClickListener(this);
+
+        Button startIntentService = findViewById(R.id.start_intent_service);
+        startIntentService.setOnClickListener(this);
     }
 
     @Override
@@ -61,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.unbind_service:
                 unbindService(connection);
+                break;
+            case R.id.start_intent_service:
+                Log.d(TAG, "Thread1 id is " + Thread.currentThread().getId());
+                Intent intentService = new Intent(this,MyIntentService.class);
+                startService(intentService);
                 break;
             default:
                 break;
