@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     stopSingleLocation();
                     singleLocation.setText("单次定位");
+                    sLocation.setText("");
                 }
                 break;
             case R.id.continue_location:
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     stopContinueLocation();
                     continueLocation.setText("连续定位");
+                    cLocation.setText("");
                 }
                 break;
             default:
@@ -172,12 +174,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(locationClientContinue == null){
             locationClientContinue = new AMapLocationClient(this.getApplicationContext());
         }
+        //连续的定位方式  默认连续
         AMapLocationClientOption locationClientOption = new AMapLocationClientOption();
-        // 单次定位开关 默认连续
-        locationClientOption.setOnceLocation(true);
+
         // 获取地址信息
         locationClientOption.setNeedAddress(true);
-        locationClientOption.setLocationCacheEnable(false);
         locationClientContinue.setLocationOption(locationClientOption);
         locationClientContinue.setLocationListener(locationContinueListener);
         locationClientContinue.startLocation();
@@ -197,10 +198,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             locationClientSingle = new AMapLocationClient(this.getApplicationContext());
         }
 
-        //连续的定位方式  默认连续
         AMapLocationClientOption locationClientOption = new AMapLocationClientOption();
+        // 单次定位开关 默认连续
+        locationClientOption.setOnceLocation(true);
         // 地址信息
         locationClientOption.setNeedAddress(true);
+        locationClientOption.setLocationCacheEnable(false);
         locationClientSingle.setLocationOption(locationClientOption);
         locationClientSingle.setLocationListener(locationSingleListener);
         locationClientSingle.startLocation();
